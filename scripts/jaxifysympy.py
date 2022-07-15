@@ -100,18 +100,38 @@ rundata = np.random.uniform(size=(npars, 1000))
 # benchmark
 ############################################################
 
-start_time = time()
-_ = f1(*warmdata)
-comptime = time() - start_time
-_ = f1(*rundata)
-runtime = (time() - start_time) - comptime
-print(f"comptime: {comptime-runtime:.2g}s runtime: {runtime:.2g}s")
+
+def performbenchmark(f, warmdata, rundata):
+    start_time = time()
+    _ = f(*warmdata).block_until_ready()
+    comptime = time() - start_time
+    _ = f(*rundata).block_until_ready()
+    runtime = (time() - start_time) - comptime
+    print(f"comptime: {comptime-runtime:.2g}s runtime: {runtime:.2g}s")
+
+
+performbenchmark(f1, warmdata, rundata)
 # comptime: -0.0041s runtime: 0.037s
 
-start_time = time()
-_ = f2(*warmdata)
-comptime = time() - start_time
-_ = f2(*rundata)
-runtime = (time() - start_time) - comptime
-print(f"comptime: {comptime-runtime:.2g}s runtime: {runtime:.2g}s")
+performbenchmark(f2, warmdata, rundata)
 # comptime: -0.00013s runtime: 0.0048s
+
+
+############################################################
+# using tensor waves
+############################################################
+
+
+preparefunct = create_function(
+    unfoldedexpr,
+    backend="jax",
+)
+
+f3 = preparefunct.function
+
+############################################################
+# benchmark
+############################################################
+
+performbenchmark(f3, warmdata[0:-1, :], rundata[0:-1, :])
+# comptime: 5.1e-05s runtime: 0.00058s
