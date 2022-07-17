@@ -65,8 +65,6 @@ def main() -> int:
 
     model = create_amplitude_model()
     parametrized_func, substituted_func = prepare_functions(model)
-    mini_sample = generate_sample(model, n_events=1, seed=123456)
-    mini_sample = {k: float(v) for k, v in mini_sample.items()}
 
     progress_bar = tqdm(
         desc="Benchmarking intensity evaluation with JAX",
@@ -82,17 +80,18 @@ def main() -> int:
                 continue
             else:
                 t[n] = defaultdict(list)
-        phsp_sample = generate_sample(model, n, seed=0)
+        warmup_sample = generate_sample(model, n, seed=123456)
+        run_sample = generate_sample(model, n, seed=0)
         for _ in range(NUMBER_OF_RUNS):
             func = recompile_jax_function(parametrized_func)
-            t[n]["parametrized, warm-up"].append(benchmark(func, mini_sample))
-            t[n]["parametrized, run 1"].append(benchmark(func, phsp_sample))
-            t[n]["parametrized, run 2"].append(benchmark(func, phsp_sample))
+            t[n]["parametrized, compilation"].append(benchmark(func, warmup_sample))
+            t[n]["parametrized, run 1, same shape"].append(benchmark(func, run_sample))
+            t[n]["parametrized, run 2, same data"].append(benchmark(func, run_sample))
 
             func = recompile_jax_function(substituted_func)
-            t[n]["substituted, warm-up"].append(benchmark(func, mini_sample))
-            t[n]["substituted, run 1"].append(benchmark(func, phsp_sample))
-            t[n]["substituted, run 2"].append(benchmark(func, phsp_sample))
+            t[n]["substituted, compilation"].append(benchmark(func, warmup_sample))
+            t[n]["substituted, run 1, same shape"].append(benchmark(func, run_sample))
+            t[n]["substituted, run 2, same data"].append(benchmark(func, run_sample))
             progress_bar.update()
         write_benchmark(t, output_file)
     progress_bar.close()
