@@ -30,51 +30,47 @@ def main() -> int:
 
     use_mpl_latex_fonts()
     plt.rc("font", size=14)
-    fig, axes = plt.subplots(figsize=(10, 5), ncols=2, tight_layout=True)
+    _, axes = plt.subplots(
+        figsize=(10, 5),
+        ncols=2,
+        tight_layout=True,
+    )
     ax1, ax2 = axes
-    fig.suptitle("JAX performance")
-    ax1.set_title("First run")
-    ax2.set_title("Second run (XLA cache)")
+    ax1.set_title("Run 1 (compilation)")
+    ax2.set_title("Run 2 (same shape, different data)")
     ax1.set_ylabel("Computation time (s)")
-    ax2.set_yscale("log")
-    for ax in axes:
+    for ax in axes.flatten():
         ax.set_xlabel("Number of events")
         ax.set_xscale("log")
         ax.grid(axis="y")
-    style = dict(
-        fmt=".",
-    )
 
-    ax1.errorbar(
-        x,
-        y["parametrized, run 1"].mean(axis=1),
-        yerr=y["parametrized, run 1"].std(axis=1),
-        label="parametrized",
-        **style,
-    )
-    ax1.errorbar(
-        x,
-        y["substituted, run 1"].mean(axis=1),
-        yerr=y["substituted, run 1"].std(axis=1),
-        label="substituted",
-        **style,
-    )
+    def plot(
+        ax,
+        key: str,
+        label: str,
+        x_selector: np.ndarray | None = None,
+        logy: bool = False,
+    ):
+        x_values = x
+        y_values = y[key]
+        if x_selector is not None:
+            x_values = x_values[x_selector]
+            y_values = y_values[x_selector, :]
+        ax.errorbar(
+            x_values,
+            y_values.mean(axis=1),
+            yerr=y_values.std(axis=1),
+            label=label,
+            fmt=".",
+        )
+        if logy:
+            ax.set_yscale("log")
 
-    ax2.errorbar(
-        x,
-        y["parametrized, run 2"].mean(axis=1),
-        yerr=y["parametrized, run 2"].std(axis=1),
-        label="parametrized",
-        **style,
-    )
-    ax2.errorbar(
-        x,
-        y["substituted, run 2"].mean(axis=1),
-        yerr=y["substituted, run 2"].std(axis=1),
-        label="substituted",
-        **style,
-    )
-    ax1.legend()
+    plot(ax1, "parametrized, compilation", "parametrized", x_selector=x <= 1e6)
+    plot(ax1, "substituted, compilation", "substituted", x_selector=x <= 1e6)
+    plot(ax2, "parametrized, run 1, same shape", "parametrized", logy=True)
+    plot(ax2, "substituted, run 1, same shape", "substituted", logy=True)
+    axes.flatten()[-1].legend()
     ax1.set_ylim(0, ax1.get_ylim()[1])
     plt.savefig(f"{THIS_DIRECTORY}/computation_times.svg")
     plt.show()
