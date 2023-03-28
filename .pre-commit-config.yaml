@@ -1,3 +1,9 @@
+ci:
+  autoupdate_commit_msg: "MAINT: autoupdate pre-commit hooks"
+  autoupdate_schedule: monthly
+  skip:
+    - pyright
+
 repos:
   - repo: meta
     hooks:
