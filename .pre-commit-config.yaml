@@ -3,6 +3,7 @@ ci:
   autoupdate_schedule: monthly
   skip:
     - pyright
+    - taplo
 
 repos:
   - repo: meta
@@ -25,15 +26,17 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
 
-  - repo: https://github.com/psf/black
-    rev: 23.1.0
+  - repo: https://github.com/ComPWA/repo-maintenance
+    rev: 0.0.172
     hooks:
-      - id: black
-
-  - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
+      - id: check-dev-files
+        args:
+          - --no-gitpod
+          - --no-prettierrc
+          - --no-pypi
+          - --repo-name=ComPWA benchmarks
+          - --repo-title=benchmarks
+      - id: format-setup-cfg
 
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.6.4
@@ -46,6 +49,27 @@ repos:
       - id: nbqa-pyupgrade
         args:
           - --py37-plus
+
+  - repo: https://github.com/psf/black
+    rev: 23.1.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 2.7.1
+    hooks:
+      - id: editorconfig-checker
+        name: editorconfig
+        alias: ec
+        exclude: >-
+          (?x)^(
+            .*\.py
+          )$
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
 
   - repo: https://github.com/kynan/nbstripout
     rev: 0.6.1
@@ -67,6 +91,7 @@ repos:
             metadata.toc-showmarkdowntxt
             metadata.toc-showtags
             metadata.varInspector
+            metadata.vscode
 
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v3.0.0-alpha.6
@@ -84,3 +109,8 @@ repos:
       - id: pyupgrade
         args:
           - --py37-plus
+
+  - repo: https://github.com/ComPWA/mirrors-taplo
+    rev: v0.8.0
+    hooks:
+      - id: taplo

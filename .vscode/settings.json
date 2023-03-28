@@ -28,10 +28,10 @@
     ".cspell/*.txt": "plaintext"
   },
   "files.eol": "\n",
+  "livePreview.defaultPreviewPath": "docs/_build/html",
   "python.analysis.autoImportCompletions": false,
   "python.analysis.diagnosticMode": "workspace",
   "python.formatting.provider": "black",
   "python.linting.enabled": true,
-  "rewrap.wrappingColumn": 88,
-  "telemetry.telemetryLevel": "off"
+  "rewrap.wrappingColumn": 88
 }
