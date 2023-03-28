@@ -1,17 +1,18 @@
 {
   "recommendations": [
-    "bungcip.better-toml",
     "eamodio.gitlens",
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
+    "github.vscode-github-actions",
     "github.vscode-pull-request-github",
     "ms-python.python",
     "ms-python.vscode-pylance",
+    "ms-vscode.live-server",
     "ms-vsliveshare.vsliveshare",
     "oijaz.unicode-latex",
     "redhat.vscode-yaml",
     "stkb.rewrap",
-    "travisillig.vscode-json-stable-stringify",
+    "tamasfe.even-better-toml",
     "tyriar.sort-lines",
     "yzhang.markdown-all-in-one"
   ]
