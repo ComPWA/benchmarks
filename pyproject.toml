@@ -26,7 +26,6 @@ profile = "black"
 src_paths = [
     "src",
 ]
-known_third_party = "THIRDPARTY,sympy"
 
 [tool.nbqa.addopts]
 black = [
