@@ -28,6 +28,7 @@
     ".cspell/*.txt": "plaintext"
   },
   "files.eol": "\n",
+  "github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"],
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "python.analysis.autoImportCompletions": false,
   "python.analysis.diagnosticMode": "workspace",
