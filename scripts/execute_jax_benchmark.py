@@ -14,12 +14,15 @@ import jax
 import polarization.lhcb
 import yaml
 from polarization.amplitude import AmplitudeModel
-from polarization.data import create_data_transformer, generate_phasespace_sample
+from polarization.data import (create_data_transformer,
+                               generate_phasespace_sample)
 from polarization.io import mute_jax_warnings, perform_cached_doit
 from polarization.lhcb import load_model_builder, load_model_parameters
 from polarization.lhcb.particle import load_particles
-from tensorwaves.function import ParametrizedBackendFunction, PositionalArgumentFunction
-from tensorwaves.function.sympy import create_function, create_parametrized_function
+from tensorwaves.function import (ParametrizedBackendFunction,
+                                  PositionalArgumentFunction)
+from tensorwaves.function.sympy import (create_function,
+                                        create_parametrized_function)
 from tensorwaves.interface import DataSample, Function
 from tqdm.auto import tqdm
 from yaml.representer import Representer
