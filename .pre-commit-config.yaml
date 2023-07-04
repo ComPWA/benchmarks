@@ -27,7 +27,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.0.179
+    rev: 0.0.184
     hooks:
       - id: check-dev-files
         args:
@@ -56,7 +56,7 @@ repos:
       - id: black
 
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: 2.7.1
+    rev: 2.7.2
     hooks:
       - id: editorconfig-checker
         name: editorconfig
@@ -100,12 +100,12 @@ repos:
       - id: prettier
 
   - repo: https://github.com/ComPWA/mirrors-pyright
-    rev: v1.1.305
+    rev: v1.1.316
     hooks:
       - id: pyright
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.2
+    rev: v3.8.0
     hooks:
       - id: pyupgrade
         args:
