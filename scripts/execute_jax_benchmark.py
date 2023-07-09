@@ -1,4 +1,4 @@
-# cspell:disable
+"""Execute JAX over a combination of physical cores."""
 from __future__ import annotations
 
 import logging
@@ -80,8 +80,7 @@ def main() -> int:
                 logging.warning(f"Benchmark for {n:,} events already exists")
                 progress_bar.update(NUMBER_OF_RUNS)
                 continue
-            else:
-                t[n] = defaultdict(list)
+            t[n] = defaultdict(list)
         warmup_sample = generate_sample(model, n, seed=123456)
         run_sample = generate_sample(model, n, seed=0)
         for _ in range(NUMBER_OF_RUNS):
@@ -175,7 +174,7 @@ def benchmark(func: Function, sample: DataSample) -> float:
 
 def load_benchmark(filename: str) -> dict[str, dict[str, list[float]]]:
     with open(filename) as f:
-        return yaml.load(f, Loader=yaml.FullLoader)
+        return yaml.safe_load(f)
 
 
 def write_benchmark(times: dict[str, dict[str, list[float]]], filename: str) -> None:

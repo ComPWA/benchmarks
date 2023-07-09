@@ -16,7 +16,7 @@ import requests
 project = "ComPWA benchmarks"
 PACKAGE = "benchmarks"
 REPO_NAME = "benchmarks"
-copyright = "2022, ComPWA"
+copyright = "2022, ComPWA"  # noqa: A001
 author = "Common Partial Wave Analysis"
 
 
