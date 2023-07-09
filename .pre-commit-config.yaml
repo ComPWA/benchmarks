@@ -110,7 +110,7 @@ repos:
           - --py37-plus
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: ""
+    rev: v0.0.277
     hooks:
       - id: ruff
         args:
