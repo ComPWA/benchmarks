@@ -145,6 +145,7 @@ task-tags = ["cspell"]
     "S113",
     "T201",
 ]
+"scripts/*" = ["INP001"]
 "setup.py" = ["D100"]
 
 [tool.ruff.pydocstyle]
