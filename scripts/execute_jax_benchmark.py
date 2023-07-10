@@ -1,4 +1,4 @@
-# cspell:disable
+"""Execute JAX over a combination of physical cores."""
 from __future__ import annotations
 
 import logging
@@ -7,22 +7,24 @@ from collections import defaultdict
 from functools import partial
 from os.path import dirname
 from time import time
-from typing import TypeVar
+from typing import TYPE_CHECKING, TypeVar
 
 import attrs
 import jax
 import polarization.lhcb
 import yaml
-from polarization.amplitude import AmplitudeModel
 from polarization.data import create_data_transformer, generate_phasespace_sample
 from polarization.io import mute_jax_warnings, perform_cached_doit
 from polarization.lhcb import load_model_builder, load_model_parameters
 from polarization.lhcb.particle import load_particles
 from tensorwaves.function import ParametrizedBackendFunction, PositionalArgumentFunction
 from tensorwaves.function.sympy import create_function, create_parametrized_function
-from tensorwaves.interface import DataSample, Function
 from tqdm.auto import tqdm
 from yaml.representer import Representer
+
+if TYPE_CHECKING:
+    from polarization.amplitude import AmplitudeModel
+    from tensorwaves.interface import DataSample, Function
 
 THIS_DIRECTORY = dirname(__file__)
 DATA_DIRECTORY = dirname(polarization.lhcb.__file__)
@@ -78,8 +80,7 @@ def main() -> int:
                 logging.warning(f"Benchmark for {n:,} events already exists")
                 progress_bar.update(NUMBER_OF_RUNS)
                 continue
-            else:
-                t[n] = defaultdict(list)
+            t[n] = defaultdict(list)
         warmup_sample = generate_sample(model, n, seed=123456)
         run_sample = generate_sample(model, n, seed=0)
         for _ in range(NUMBER_OF_RUNS):
@@ -143,8 +144,7 @@ def generate_sample(
     LOGGER.setLevel(logging.ERROR)
     phsp_sample = generate_phasespace_sample(model.decay, n_events, seed)
     LOGGER.setLevel(original_log_level)
-    phsp_sample = transformer(phsp_sample)
-    return phsp_sample
+    return transformer(phsp_sample)
 
 
 T = TypeVar("T", ParametrizedBackendFunction, PositionalArgumentFunction)
@@ -174,7 +174,7 @@ def benchmark(func: Function, sample: DataSample) -> float:
 
 def load_benchmark(filename: str) -> dict[str, dict[str, list[float]]]:
     with open(filename) as f:
-        return yaml.load(f, Loader=yaml.FullLoader)
+        return yaml.safe_load(f)
 
 
 def write_benchmark(times: dict[str, dict[str, list[float]]], filename: str) -> None:

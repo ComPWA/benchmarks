@@ -1,4 +1,4 @@
-# cspell:disable
+"""Visualize benchmark results from :file:`execute_jax_benchmark.py`."""
 from __future__ import annotations
 
 import logging
@@ -66,8 +66,9 @@ def main() -> int:
         if logy:
             ax.set_yscale("log")
 
-    plot(ax1, "parametrized, compilation", "parametrized", x_selector=x <= 1e6)
-    plot(ax1, "substituted, compilation", "substituted", x_selector=x <= 1e6)
+    max_x = 1e6
+    plot(ax1, "parametrized, compilation", "parametrized", x_selector=x <= max_x)
+    plot(ax1, "substituted, compilation", "substituted", x_selector=x <= max_x)
     plot(ax2, "parametrized, run 1, same shape", "parametrized", logy=True)
     plot(ax2, "substituted, run 1, same shape", "substituted", logy=True)
     axes.flatten()[-1].legend()
@@ -80,7 +81,7 @@ def main() -> int:
 
 def load_benchmark(filename: str) -> dict[str, dict[str, list[float]]]:
     with open(filename) as f:
-        return yaml.load(f, Loader=yaml.FullLoader)
+        return yaml.safe_load(f)
 
 
 if "__main__" in __name__:

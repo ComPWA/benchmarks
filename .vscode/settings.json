@@ -31,8 +31,12 @@
   "github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"],
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "python.analysis.autoImportCompletions": false,
-  "python.analysis.diagnosticMode": "workspace",
   "python.formatting.provider": "black",
   "python.linting.enabled": true,
-  "rewrap.wrappingColumn": 88
+  "python.linting.flake8Enabled": false,
+  "python.linting.pydocstyleEnabled": false,
+  "python.linting.pylintEnabled": false,
+  "rewrap.wrappingColumn": 88,
+  "ruff.enable": true,
+  "ruff.organizeImports": true
 }

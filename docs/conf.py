@@ -6,6 +6,7 @@ documentation: https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 from __future__ import annotations
 
+import contextlib
 import os
 import re
 
@@ -15,7 +16,7 @@ import requests
 project = "ComPWA benchmarks"
 PACKAGE = "benchmarks"
 REPO_NAME = "benchmarks"
-copyright = "2022, ComPWA"
+copyright = "2022, ComPWA"  # noqa: A001
 author = "Common Partial Wave Analysis"
 
 
@@ -30,13 +31,11 @@ def get_branch_name() -> str:
 
 def get_logo_path() -> str | None:
     path = "_static/logo.svg"
-    try:
+    with contextlib.suppress(requests.exceptions.ConnectionError):
         _fetch_logo(
             url="https://raw.githubusercontent.com/ComPWA/ComPWA/04e5199/doc/images/logo.svg",
             output_path=path,
         )
-    except requests.exceptions.ConnectionError:
-        pass
     if os.path.exists(path):
         return path
     return None
