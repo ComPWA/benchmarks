@@ -7,6 +7,7 @@
     "garaioag.garaio-vscode-unwanted-recommendations",
     "github.vscode-github-actions",
     "github.vscode-pull-request-github",
+    "ms-python.black-formatter",
     "ms-python.python",
     "ms-python.vscode-pylance",
     "ms-vscode.live-server",
@@ -20,6 +21,7 @@
   ],
   "unwantedRecommendations": [
     "bungcip.better-toml",
+    "davidanson.vscode-markdownlint",
     "ms-python.flake8",
     "ms-python.isort",
     "ms-python.mypy-type-checker",

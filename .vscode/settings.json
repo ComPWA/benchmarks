@@ -16,12 +16,13 @@
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
-    }
+    },
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.enabled": true,
+  "black-formatter.importStrategy": "fromEnvironment",
   "editor.formatOnSave": true,
   "editor.rulers": [88],
   "files.associations": {
@@ -31,11 +32,6 @@
   "github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"],
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "python.analysis.autoImportCompletions": false,
-  "python.formatting.provider": "black",
-  "python.linting.enabled": true,
-  "python.linting.flake8Enabled": false,
-  "python.linting.pydocstyleEnabled": false,
-  "python.linting.pylintEnabled": false,
   "rewrap.wrappingColumn": 88,
   "ruff.enable": true,
   "ruff.organizeImports": true
