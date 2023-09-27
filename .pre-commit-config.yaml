@@ -41,9 +41,6 @@ repos:
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.7.0
     hooks:
-      - id: nbqa-black
-        additional_dependencies:
-          - black>=22.1.0
       - id: nbqa-pyupgrade
         args:
           - --py37-plus
@@ -55,6 +52,9 @@ repos:
     rev: 23.3.0
     hooks:
       - id: black
+      - id: black-jupyter
+        args: [--line-length=85]
+        types_or: [jupyter]
 
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
     rev: 2.7.2
