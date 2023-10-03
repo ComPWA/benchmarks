@@ -40,6 +40,25 @@ ruff = [
 [tool.nbqa.exclude]
 flake8 = "^docs/appendix/benchmark.ipynb"
 
+[tool.pyright]
+reportGeneralTypeIssues = false
+reportImportCycles = false
+reportMissingParameterType = false
+reportMissingTypeArgument = false
+reportMissingTypeStubs = false
+reportPrivateImportUsage = false
+reportUnknownArgumentType = false
+reportUnknownLambdaType = false
+reportUnknownMemberType = false
+reportUnknownParameterType = false
+reportUnknownVariableType = false
+reportUnnecessaryIsInstance = false
+reportUnusedClass = true
+reportUnusedFunction = true
+reportUnusedImport = true
+reportUnusedVariable = true
+typeCheckingMode = "strict"
+
 [tool.pytest.ini_options]
 addopts = [
     "--color=yes",
@@ -65,25 +84,6 @@ testpaths = [
     "src",
     "tests",
 ]
-
-[tool.pyright]
-reportGeneralTypeIssues = false
-reportImportCycles = false
-reportMissingParameterType = false
-reportMissingTypeArgument = false
-reportMissingTypeStubs = false
-reportPrivateImportUsage = false
-reportUnknownArgumentType = false
-reportUnknownLambdaType = false
-reportUnknownMemberType = false
-reportUnknownParameterType = false
-reportUnknownVariableType = false
-reportUnnecessaryIsInstance = false
-reportUnusedClass = true
-reportUnusedFunction = true
-reportUnusedImport = true
-reportUnusedVariable = true
-typeCheckingMode = "strict"
 
 [tool.ruff]
 extend-select = [
@@ -148,3 +148,17 @@ task-tags = ["cspell"]
 
 [tool.ruff.pydocstyle]
 convention = "google"
+
+[tool.tomlsort]
+all = false
+ignore_case = true
+in_place = true
+sort_first = [
+    "build-system",
+    "project",
+    "tool.setuptools",
+    "tool.setuptools_scm",
+]
+sort_table_keys = true
+spaces_indent_inline_array = 4
+trailing_comma_inline_array = true
