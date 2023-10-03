@@ -1,3 +1,80 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=61.2"]
+
+[project]
+authors = [{name = "Common Partial Wave Analysis", email = "compwa-admin@ep1.rub.de"}]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Typing :: Typed",
+]
+dependencies = [
+    "matplotlib",
+    "polarization-sensitivity @ git+https://github.com/redeboer/polarization-sensitivity@15f5ce0",
+    "tensorwaves[jax] >=0.4.5", # lambdify sympy.Indexed
+]
+description = "Benchmarks for amplitude analysis frameworks"
+dynamic = ["version"]
+license = {text = "GPLv3 or later"}
+name = "benchmarks"
+requires-python = ">=3.7"
+
+[project.optional-dependencies]
+dev = [
+    "benchmarks[doc]",
+    "benchmarks[jupyter]",
+    "benchmarks[sty]",
+    "sphinx-autobuild",
+    "tox >=1.9", # for skip_install, use_develop
+]
+doc = [
+    "myst-nb >=0.14", # nb_ configuration prefixes
+    "myst-parser[linkify]",
+    "pandas",
+    "Sphinx >=3",
+    "sphinx-book-theme",
+    "sphinx-codeautolink[ipython]",
+    "sphinx-copybutton",
+    "sphinx-togglebutton",
+]
+format = [
+    "black",
+]
+jupyter = [
+    "jupyterlab >=3.0",
+    "jupyterlab-code-formatter",
+    'jupyterlab-myst; python_version >="3.7.0"',
+]
+lint = [
+    "ruff",
+]
+sty = [
+    "benchmarks[format]",
+    "benchmarks[lint]",
+    "pre-commit >=1.4.0",
+]
+
+[project.readme]
+content-type = "text/markdown"
+file = "README.md"
+
+[tool.setuptools]
+include-package-data = false
+
 [tool.black]
 exclude = '''
 /(

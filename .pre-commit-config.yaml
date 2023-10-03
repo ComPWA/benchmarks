@@ -37,8 +37,6 @@ repos:
           - --repo-name=ComPWA benchmarks
           - --repo-title=benchmarks
       - id: colab-toc-visible
-      - id: format-setup-cfg
-
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.7.0
     hooks:
