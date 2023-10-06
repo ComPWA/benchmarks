@@ -31,6 +31,7 @@
   "files.eol": "\n",
   "github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"],
   "livePreview.defaultPreviewPath": "docs/_build/html",
+  "notebook.gotoSymbols.showAllSymbols": true,
   "python.analysis.autoImportCompletions": false,
   "rewrap.wrappingColumn": 88,
   "ruff.enable": true,
