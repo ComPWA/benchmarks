@@ -1,4 +1,8 @@
 {
+  "[git-commit]": {
+    "editor.rulers": [72],
+    "rewrap.wrappingColumn": 72
+  },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -8,7 +12,6 @@
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.rulers": [],
-    "editor.wordWrap": "bounded",
     "editor.wordWrapColumn": 80,
     "editor.wrappingIndent": "same",
     "editor.wrappingStrategy": "advanced"
@@ -17,14 +20,14 @@
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
     },
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.rulers": [88]
   },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "black-formatter.importStrategy": "fromEnvironment",
   "editor.formatOnSave": true,
-  "editor.rulers": [88],
   "files.associations": {
     ".cspell/*.txt": "plaintext"
   },
