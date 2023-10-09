@@ -1,4 +1,8 @@
 {
+  "[git-commit]": {
+    "editor.rulers": [72],
+    "rewrap.wrappingColumn": 72
+  },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -8,7 +12,6 @@
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.rulers": [],
-    "editor.wordWrap": "bounded",
     "editor.wordWrapColumn": 80,
     "editor.wrappingIndent": "same",
     "editor.wrappingStrategy": "advanced"
@@ -16,26 +19,23 @@
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
-    }
+    },
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.rulers": [88]
   },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.enabled": true,
+  "black-formatter.importStrategy": "fromEnvironment",
   "editor.formatOnSave": true,
-  "editor.rulers": [88],
   "files.associations": {
     ".cspell/*.txt": "plaintext"
   },
   "files.eol": "\n",
   "github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"],
   "livePreview.defaultPreviewPath": "docs/_build/html",
+  "notebook.gotoSymbols.showAllSymbols": true,
   "python.analysis.autoImportCompletions": false,
-  "python.formatting.provider": "black",
-  "python.linting.enabled": true,
-  "python.linting.flake8Enabled": false,
-  "python.linting.pydocstyleEnabled": false,
-  "python.linting.pylintEnabled": false,
   "rewrap.wrappingColumn": 88,
   "ruff.enable": true,
   "ruff.organizeImports": true
