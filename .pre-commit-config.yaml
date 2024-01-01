@@ -27,7 +27,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.1.0
+    rev: 0.1.11
     hooks:
       - id: check-dev-files
         args:
@@ -38,7 +38,7 @@ repos:
           - --repo-title=benchmarks
       - id: colab-toc-visible
   - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.7.0
+    rev: 1.7.1
     hooks:
       - id: nbqa-pyupgrade
         args:
@@ -48,7 +48,7 @@ repos:
           - --fix
 
   - repo: https://github.com/psf/black
-    rev: 23.9.1
+    rev: 23.12.1
     hooks:
       - id: black
       - id: black-jupyter
@@ -56,7 +56,7 @@ repos:
         types_or: [jupyter]
 
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: 2.7.2
+    rev: 2.7.3
     hooks:
       - id: editorconfig-checker
         name: editorconfig
@@ -92,12 +92,12 @@ repos:
             metadata.vscode
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.3
+    rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
 
   - repo: https://github.com/ComPWA/mirrors-pyright
-    rev: v1.1.330
+    rev: v1.1.344
     hooks:
       - id: pyright
 
@@ -109,7 +109,7 @@ repos:
           - --py37-plus
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.0.292
+    rev: v0.1.9
     hooks:
       - id: ruff
         args:
