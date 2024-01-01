@@ -1,4 +1,5 @@
 """Execute JAX over a combination of physical cores."""
+
 from __future__ import annotations
 
 import logging

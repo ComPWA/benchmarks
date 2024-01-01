@@ -2,6 +2,7 @@ ci:
   autoupdate_commit_msg: "MAINT: autoupdate pre-commit hooks"
   autoupdate_schedule: quarterly
   skip:
+    - prettier
     - pyright
     - taplo
 
@@ -11,6 +12,17 @@ repos:
       - id: check-hooks-apply
       - id: check-useless-excludes
 
+  - repo: https://github.com/ComPWA/repo-maintenance
+    rev: 0.1.11
+    hooks:
+      - id: check-dev-files
+        args:
+          - --no-gitpod
+          - --no-prettierrc
+          - --no-pypi
+          - --repo-name=ComPWA benchmarks
+          - --repo-title=benchmarks
+      - id: colab-toc-visible
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
@@ -26,29 +38,8 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
 
-  - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.1.11
-    hooks:
-      - id: check-dev-files
-        args:
-          - --no-gitpod
-          - --no-prettierrc
-          - --no-pypi
-          - --repo-name=ComPWA benchmarks
-          - --repo-title=benchmarks
-      - id: colab-toc-visible
-  - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.7.1
-    hooks:
-      - id: nbqa-pyupgrade
-        args:
-          - --py37-plus
-      - id: nbqa-ruff
-        args:
-          - --fix
-
-  - repo: https://github.com/psf/black
-    rev: 23.12.1
+  - repo: https://github.com/psf/black-pre-commit-mirror
+    rev: PLEASE-UPDATE
     hooks:
       - id: black
       - id: black-jupyter
@@ -101,19 +92,12 @@ repos:
     hooks:
       - id: pyright
 
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.0
-    hooks:
-      - id: pyupgrade
-        args:
-          - --py37-plus
-
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.9
     hooks:
       - id: ruff
-        args:
-          - --fix
+        args: [--fix]
+        types_or: [python, pyi, jupyter]
 
   - repo: https://github.com/ComPWA/mirrors-taplo
     rev: v0.8.1
