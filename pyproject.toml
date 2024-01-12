@@ -231,6 +231,7 @@ task-tags = ["cspell"]
     "S113",
     "T201",
 ]
+"docs/conf.py" = ["D100"]
 "scripts/*" = ["INP001"]
 "setup.py" = ["D100"]
 

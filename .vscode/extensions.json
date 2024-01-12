@@ -28,6 +28,7 @@
     "ms-python.isort",
     "ms-python.mypy-type-checker",
     "ms-python.pylint",
+    "streetsidesoftware.code-spell-checker",
     "travisillig.vscode-json-stable-stringify"
   ]
 }
