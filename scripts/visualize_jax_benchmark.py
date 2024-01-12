@@ -1,4 +1,5 @@
 """Visualize benchmark results from :file:`execute_jax_benchmark.py`."""
+
 from __future__ import annotations
 
 import logging
