@@ -4,7 +4,7 @@
 
 ```
 
-These webpages are a visualization of the benchmark scripts provided in the https://github.com/ComPWA/benchmarks repositories.
+These webpages are a visualization of the benchmark scripts provided in the [github.com/ComPWA/benchmarks](https://github.com/ComPWA/benchmarks) repository.
 
 ```{toctree}
 ---

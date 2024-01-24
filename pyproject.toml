@@ -47,6 +47,7 @@ doc = [
     "myst-nb >=0.14", # nb_ configuration prefixes
     "myst-parser[linkify]",
     "pandas",
+    "sphinx-api-relink",
     "sphinx-book-theme",
     "sphinx-codeautolink[ipython]",
     "sphinx-copybutton",
@@ -73,10 +74,14 @@ lint = [
 sty = [
     "benchmarks[format]",
     "benchmarks[lint]",
+    "benchmarks[types]",
     "pre-commit >=1.4.0",
 ]
 test = [
     "nbmake",
+]
+types = [
+    "sphinx-api-relink",
 ]
 
 [project.readme]
