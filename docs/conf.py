@@ -1,68 +1,19 @@
-"""Configuration file for the Sphinx documentation builder.
-
-This file only contains a selection of the most common options. For a full list see the
-documentation: https://www.sphinx-doc.org/en/master/usage/configuration.html
-"""
-
 from __future__ import annotations
 
-import contextlib
-import os
-import re
+from sphinx_api_relink.helpers import get_branch_name, get_execution_mode
 
-import requests
-
-# -- Project information -----------------------------------------------------
-project = "ComPWA benchmarks"
+BRANCH = get_branch_name()
+ORGANIZATION = "ComPWA"
 PACKAGE = "benchmarks"
 REPO_NAME = "benchmarks"
-copyright = "2022, ComPWA"  # noqa: A001
-author = "Common Partial Wave Analysis"
-
-
-def get_branch_name() -> str:
-    branch_name = os.environ.get("READTHEDOCS_VERSION", "stable")
-    if branch_name == "latest":
-        return "main"
-    if re.match(r"^\d+$", branch_name):  # PR preview
-        return "stable"
-    return branch_name
-
-
-def get_logo_path() -> str | None:
-    path = "_static/logo.svg"
-    with contextlib.suppress(requests.exceptions.ConnectionError):
-        _fetch_logo(
-            url="https://raw.githubusercontent.com/ComPWA/ComPWA/04e5199/doc/images/logo.svg",
-            output_path=path,
-        )
-    if os.path.exists(path):
-        return path
-    return None
-
-
-def get_nb_execution_mode() -> str:
-    if "FORCE_EXECUTE_NB" in os.environ:
-        print("\033[93;1mWill run ALL Jupyter notebooks!\033[0m")
-        return "force"
-    if "EXECUTE_NB" in os.environ:
-        return "cache"
-    return "off"
-
-
-def _fetch_logo(url: str, output_path: str) -> None:
-    if os.path.exists(output_path):
-        return
-    online_content = requests.get(url, allow_redirects=True)
-    with open(output_path, "wb") as stream:
-        stream.write(online_content.content)
+REPO_TITLE = "ComPWA benchmarks"
 
 
 autosectionlabel_prefix_document = True
 codeautolink_concat_default = True
 copybutton_prompt_is_regexp = True
-copybutton_prompt_text = r">>> |\.\.\. "  # doctest
-default_role = "py:obj"
+copybutton_prompt_text = r">>> |\.\.\. "
+copyright = f"2024, {ORGANIZATION}"  # noqa: A001
 exclude_patterns = [
     "**.ipynb_checkpoints",
     "*build",
@@ -81,7 +32,9 @@ extensions = [
 html_copy_source = True  # needed for download notebook button
 html_favicon = "_static/favicon.ico"
 html_last_updated_fmt = "%-d %B %Y"
-html_logo = get_logo_path()
+html_logo = (
+    "https://raw.githubusercontent.com/ComPWA/ComPWA/04e5199/doc/images/logo.svg"
+)
 html_show_copyright = False
 html_show_sourcelink = False
 html_show_sphinx = False
@@ -89,24 +42,50 @@ html_sourcelink_suffix = ""
 html_static_path = ["_static"]
 html_theme = "sphinx_book_theme"
 html_theme_options = {
-    "logo": {"text": project},
-    "repository_url": f"https://github.com/ComPWA/{REPO_NAME}",
-    "repository_branch": get_branch_name(),
-    "path_to_docs": "docs",
-    "use_download_button": True,
-    "use_edit_page_button": True,
-    "use_issues_button": True,
-    "use_repository_button": True,
+    "icon_links": [
+        {
+            "name": "Common Partial Wave Analysis",
+            "url": "https://compwa.github.io",
+            "icon": "https://compwa.github.io/_static/favicon.ico",
+            "type": "url",
+        },
+        {
+            "name": "GitHub",
+            "url": f"https://github.com/{ORGANIZATION}/{REPO_NAME}",
+            "icon": "fa-brands fa-github",
+        },
+        {
+            "name": "Launch on Binder",
+            "url": f"https://mybinder.org/v2/gh/{ORGANIZATION}/{REPO_NAME}/{BRANCH}?filepath=docs",
+            "icon": "https://mybinder.readthedocs.io/en/latest/_static/favicon.png",
+            "type": "url",
+        },
+        {
+            "name": "Launch on Colaboratory",
+            "url": f"https://colab.research.google.com/github/{ORGANIZATION}/{REPO_NAME}/blob/{BRANCH}",
+            "icon": "https://avatars.githubusercontent.com/u/33467679?s=100",
+            "type": "url",
+        },
+    ],
     "launch_buttons": {
         "binderhub_url": "https://mybinder.org",
         "colab_url": "https://colab.research.google.com",
         "deepnote_url": "https://deepnote.com",
         "notebook_interface": "jupyterlab",
     },
+    "logo": {"text": REPO_TITLE},
+    "path_to_docs": "docs",
+    "repository_branch": BRANCH,
+    "repository_url": f"https://github.com/{ORGANIZATION}/{REPO_NAME}",
     "show_navbar_depth": 2,
     "show_toc_level": 2,
+    "use_download_button": False,
+    "use_edit_page_button": True,
+    "use_issues_button": True,
+    "use_repository_button": True,
+    "use_source_button": True,
 }
-html_title = project
+html_title = REPO_TITLE
 intersphinx_mapping = {
     "matplotlib": ("https://matplotlib.org/stable", None),
     "numpy": ("https://numpy.org/doc/stable", None),
@@ -121,7 +100,7 @@ myst_enable_extensions = [
 ]
 myst_linkify_fuzzy_links = False
 myst_update_mathjax = False
-nb_execution_mode = get_nb_execution_mode()
+nb_execution_mode = get_execution_mode()
 nb_execution_show_tb = True
 nb_execution_timeout = -1
 nb_output_stderr = "remove"
@@ -134,4 +113,4 @@ nitpick_ignore = [
 ]
 nitpicky = True  # warn if cross-references are missing
 primary_domain = "py"
-pygments_style = "sphinx"
+project = REPO_TITLE
