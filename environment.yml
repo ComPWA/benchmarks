@@ -2,9 +2,9 @@ name: benchmarks
 channels:
   - defaults
 dependencies:
-  - python==3.8.*
+  - python==3.9.*
   - pip
   - pip:
       - -e .[dev]
 variables:
-  PRETTIER_LEGACY_CLI: "1"
+  PRETTIER_LEGACY_CLI: 1
