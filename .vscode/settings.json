@@ -1,8 +1,6 @@
 {
   "[git-commit]": {
-    "editor.rulers": [
-      72
-    ],
+    "editor.rulers": [72],
     "rewrap.wrappingColumn": 72
   },
   "[json]": {
@@ -24,9 +22,7 @@
       "source.organizeImports": "explicit"
     },
     "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.rulers": [
-      88
-    ]
+    "editor.rulers": [88]
   },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -37,9 +33,7 @@
     ".cspell/*.txt": "plaintext"
   },
   "files.eol": "\n",
-  "github-actions.workflows.pinned.workflows": [
-    ".github/workflows/ci.yml"
-  ],
+  "github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"],
   "gitlens.telemetry.enabled": false,
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "multiDiffEditor.experimental.enabled": true,
