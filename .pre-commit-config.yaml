@@ -13,7 +13,7 @@ repos:
       - id: check-useless-excludes
 
   - repo: https://github.com/kynan/nbstripout
-    rev: 0.6.1
+    rev: 0.7.1
     hooks:
       - id: nbstripout
         args:
@@ -38,7 +38,7 @@ repos:
             metadata.vscode
 
   - repo: https://github.com/ComPWA/policy
-    rev: 0.2.3
+    rev: 0.3.3
     hooks:
       - id: check-dev-files
         args:
@@ -65,7 +65,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 23.12.1
+    rev: 24.3.0
     hooks:
       - id: black
       - id: black-jupyter
@@ -101,12 +101,12 @@ repos:
           )$
 
   - repo: https://github.com/ComPWA/mirrors-pyright
-    rev: v1.1.345
+    rev: v1.1.356
     hooks:
       - id: pyright
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.13
+    rev: v0.3.5
     hooks:
       - id: ruff
         args: [--fix]
