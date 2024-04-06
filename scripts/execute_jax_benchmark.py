@@ -60,7 +60,7 @@ NUMBER_OF_RUNS = 5
 
 
 def main() -> int:
-    t: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
+    t: dict[int, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
     output_file = f"{THIS_DIRECTORY}/computation_times.yaml"
     if os.path.exists(output_file):
         imported_times = load_benchmark(output_file)
@@ -111,7 +111,7 @@ def create_amplitude_model() -> AmplitudeModel:
     )
     reference_subsystem = 1
     model = amplitude_builder.formulate(reference_subsystem)
-    model.parameter_defaults.update(imported_parameter_values)
+    model.parameter_defaults.update(imported_parameter_values)  # pyright:ignore[reportArgumentType,reportCallIssue]
     return model
 
 
@@ -173,12 +173,12 @@ def benchmark(func: Function, sample: DataSample) -> float:
     return stop - start
 
 
-def load_benchmark(filename: str) -> dict[str, dict[str, list[float]]]:
+def load_benchmark(filename: str) -> dict[int, dict[str, list[float]]]:
     with open(filename) as f:
         return yaml.safe_load(f)
 
 
-def write_benchmark(times: dict[str, dict[str, list[float]]], filename: str) -> None:
+def write_benchmark(times: dict[int, dict[str, list[float]]], filename: str) -> None:
     with open(filename, "w") as f:
         yaml.dump(
             times,
