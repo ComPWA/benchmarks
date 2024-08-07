@@ -89,6 +89,7 @@ file = "README.md"
 include-package-data = false
 
 [tool.pyright]
+reportAttributeAccessIssue = false
 reportGeneralTypeIssues = false
 reportImportCycles = false
 reportMissingParameterType = false
