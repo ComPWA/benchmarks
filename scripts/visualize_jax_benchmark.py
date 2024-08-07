@@ -51,7 +51,7 @@ def main() -> int:
         label: str,
         x_selector: np.ndarray | None = None,
         logy: bool = False,
-    ):
+    ) -> int | None:
         x_values = x
         y_values = y[key]
         if x_selector is not None:

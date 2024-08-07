@@ -191,7 +191,7 @@ def write_benchmark(times: dict[int, dict[str, list[float]]], filename: str) -> 
 
 class IncreasedIndent(yaml.Dumper):
     # pylint: disable=too-many-ancestors
-    def increase_indent(self, flow: bool = False, indentless: bool = False) -> None:
+    def increase_indent(self, flow: bool = False, indentless: bool = False) -> None:  # noqa: ARG002
         return super().increase_indent(flow, False)
 
     def write_line_break(self, data: str | None = None) -> None:
