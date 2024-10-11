@@ -14,8 +14,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python",
     "Topic :: Scientific/Engineering :: Physics",
@@ -31,7 +30,7 @@ description = "Benchmarks for amplitude analysis frameworks"
 dynamic = ["version"]
 license = {text = "GPLv3 or later"}
 name = "benchmarks"
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 
 [project.optional-dependencies]
 dev = [
@@ -60,9 +59,9 @@ jupyter = [
     "jupyterlab-git",
     "jupyterlab-lsp",
     "jupyterlab-myst",
+    "jupyterlab-myst",
     "python-lsp-ruff",
     "python-lsp-server[rope]",
-    'jupyterlab-myst; python_version >="3.7.0"',
 ]
 lint = [
     "ruff",
@@ -138,7 +137,7 @@ testpaths = [
 extend-include = ["*.ipynb"]
 preview = true
 show-fixes = true
-target-version = "py37"
+target-version = "py39"
 
 [tool.ruff.format]
 docstring-code-format = true
