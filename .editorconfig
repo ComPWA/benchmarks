@@ -6,8 +6,11 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+[*.ipynb]
+indent_size = unset
+
 [*.{py,toml}]
 indent_size = 4
 
-[setup.cfg]
+[uv.lock]
 indent_size = 4

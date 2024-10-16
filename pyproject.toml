@@ -4,23 +4,6 @@ requires = ["setuptools>=61.2"]
 
 [project]
 authors = [{name = "Common Partial Wave Analysis", email = "compwa-admin@ep1.rub.de"}]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "Intended Audience :: Education",
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
-    "Natural Language :: English",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python",
-    "Topic :: Scientific/Engineering :: Physics",
-    "Topic :: Scientific/Engineering",
-    "Typing :: Typed",
-]
 dependencies = [
     "matplotlib",
     "polarization-sensitivity @ git+https://github.com/redeboer/polarization-sensitivity@15f5ce0",
@@ -30,7 +13,7 @@ description = "Benchmarks for amplitude analysis frameworks"
 dynamic = ["version"]
 license = {text = "GPLv3 or later"}
 name = "benchmarks"
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 
 [project.optional-dependencies]
 dev = [
@@ -39,13 +22,13 @@ dev = [
     "benchmarks[sty]",
     "benchmarks[test]",
     "sphinx-autobuild",
-    "tox >=1.9", # for skip_install, use_develop
+    "tox",
 ]
 doc = [
-    "Sphinx >=3",
-    "myst-nb >=0.14", # nb_ configuration prefixes
+    "benchmarks[notebooks]",
+    "myst-nb",
     "myst-parser[linkify]",
-    "pandas",
+    "sphinx",
     "sphinx-api-relink",
     "sphinx-book-theme",
     "sphinx-codeautolink[ipython]",
@@ -53,7 +36,7 @@ doc = [
     "sphinx-togglebutton",
 ]
 jupyter = [
-    "jupyterlab >=3.0",
+    "jupyterlab",
     "jupyterlab",
     "jupyterlab-code-formatter >=3.0.0",
     "jupyterlab-git",
@@ -66,11 +49,14 @@ jupyter = [
 lint = [
     "ruff",
 ]
+notebooks = [
+    "pandas",
+]
 sty = [
     "benchmarks[format]",
     "benchmarks[lint]",
     "benchmarks[types]",
-    "pre-commit >=1.4.0",
+    "pre-commit-uv",
     "ruff",
 ]
 test = [
@@ -88,6 +74,9 @@ file = "README.md"
 include-package-data = false
 
 [tool.pyright]
+exclude = [
+    "**/.venv/",
+]
 reportAttributeAccessIssue = false
 reportGeneralTypeIssues = false
 reportImportCycles = false
@@ -137,7 +126,6 @@ testpaths = [
 extend-include = ["*.ipynb"]
 preview = true
 show-fixes = true
-target-version = "py39"
 
 [tool.ruff.format]
 docstring-code-format = true
@@ -226,6 +214,98 @@ sort_first = [
     "tool.setuptools",
     "tool.setuptools_scm",
 ]
-sort_table_keys = true
 spaces_indent_inline_array = 4
 trailing_comma_inline_array = true
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist =
+    docnb-force,
+    linkcheck,
+    sty,
+skip_install = True
+skip_missing_interpreters = True
+skipsdist = True
+
+[testenv]
+passenv = *
+setenv =
+    PYTHONHASHSEED = 0
+
+[testenv:doc]
+allowlist_externals =
+    sphinx-build
+commands =
+    sphinx-build \
+        --builder=html \
+        --fail-on-warning \
+        --keep-going \
+        --show-traceback \
+        docs/ docs/_build/html
+description = Build documentation and API through Sphinx
+
+[testenv:docnb]
+base = doc
+description = {[testenv:doc]description} with cached notebook execution
+setenv =
+    {[testenv:doc]setenv}
+    EXECUTE_NB = yes
+
+[testenv:docnb-force]
+base = doc
+description = {[testenv:doc]description} with notebook execution (no cache)
+setenv =
+    {[testenv:doc]setenv}
+    FORCE_EXECUTE_NB = yes
+
+[testenv:doclive]
+allowlist_externals =
+    sphinx-autobuild
+commands =
+    sphinx-autobuild \
+        --open-browser \
+        --port=0 \
+        --re-ignore='.*/__pycache__/.*' \
+        --re-ignore='.*/.ipynb_checkpoints/.*' \
+        --re-ignore='.*/.virtual_documents/.*' \
+        --re-ignore='.*\\.tmp' \
+        --watch docs \
+        docs/ docs/_build/html
+description = Set up a server to directly preview changes to the HTML pages
+
+[testenv:docnblive]
+base = doclive
+description = {[testenv:doclive]description} with cached notebook execution
+setenv =
+    {[testenv:doclive]setenv}
+    EXECUTE_NB = yes
+
+[testenv:linkcheck]
+allowlist_externals =
+    sphinx-build
+commands =
+    sphinx-build \
+        --builder=linkcheck \
+        --show-traceback \
+        docs/ docs/_build/linkcheck
+description = Check external links in the documentation (requires internet connection)
+setenv =
+    PYTHONWARNINGS =
+
+[testenv:nb]
+allowlist_externals =
+    pytest
+commands =
+    pytest --nbmake {posargs:docs}
+description = Run all notebooks with pytest
+
+[testenv:sty]
+allowlist_externals =
+    pre-commit
+commands =
+    pre-commit run {posargs} --all-files
+description = Perform all linting, formatting, and spelling checks
+setenv =
+    SKIP = pyright
+"""
