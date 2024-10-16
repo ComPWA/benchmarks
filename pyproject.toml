@@ -13,7 +13,7 @@ description = "Benchmarks for amplitude analysis frameworks"
 dynamic = ["version"]
 license = {text = "GPLv3 or later"}
 name = "benchmarks"
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 
 [project.optional-dependencies]
 dev = [
