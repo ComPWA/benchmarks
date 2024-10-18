@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from sphinx_api_relink.helpers import get_branch_name, get_execution_mode
 
 BRANCH = get_branch_name()
@@ -56,7 +54,7 @@ html_theme_options = {
         },
         {
             "name": "Launch on Binder",
-            "url": f"https://mybinder.org/v2/gh/{ORGANIZATION}/{REPO_NAME}/{BRANCH}?filepath=docs",
+            "url": f"https://mybinder.org/v2/gh/{ORGANIZATION}/{REPO_NAME}/{BRANCH}?urlpath=lab",
             "icon": "https://mybinder.readthedocs.io/en/latest/_static/favicon.png",
             "type": "url",
         },
