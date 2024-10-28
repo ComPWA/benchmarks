@@ -42,7 +42,6 @@ doc = [
 jupyter = [
     "jupyterlab",
     "jupyterlab",
-    "jupyterlab-code-formatter >=3.0.0",
     "jupyterlab-code-formatter",
     "jupyterlab-git",
     "jupyterlab-lsp",

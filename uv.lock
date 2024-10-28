@@ -233,7 +233,6 @@ requires-dist = [
 dev = [
     { name = "jupyterlab" },
     { name = "jupyterlab-code-formatter" },
-    { name = "jupyterlab-code-formatter", specifier = ">=3.0.0" },
     { name = "jupyterlab-git" },
     { name = "jupyterlab-lsp" },
     { name = "jupyterlab-myst" },
@@ -266,7 +265,6 @@ doc = [
 jupyter = [
     { name = "jupyterlab" },
     { name = "jupyterlab-code-formatter" },
-    { name = "jupyterlab-code-formatter", specifier = ">=3.0.0" },
     { name = "jupyterlab-git" },
     { name = "jupyterlab-lsp" },
     { name = "jupyterlab-myst" },
