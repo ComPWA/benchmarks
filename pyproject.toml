@@ -52,11 +52,8 @@ jupyter = [
     "python-lsp-server[rope]",
 ]
 notebooks = ["pandas"]
-style = [
-    {include-group = "types"},
-]
+style = ["sphinx-api-relink"]
 test = ["nbmake"]
-types = ["sphinx-api-relink"]
 
 [tool.setuptools]
 include-package-data = false

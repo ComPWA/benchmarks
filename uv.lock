@@ -220,9 +220,6 @@ style = [
 test = [
     { name = "nbmake" },
 ]
-types = [
-    { name = "sphinx-api-relink" },
-]
 
 [package.metadata]
 requires-dist = [
@@ -278,7 +275,6 @@ jupyter = [
 notebooks = [{ name = "pandas" }]
 style = [{ name = "sphinx-api-relink" }]
 test = [{ name = "nbmake" }]
-types = [{ name = "sphinx-api-relink" }]
 
 [[package]]
 name = "bleach"
