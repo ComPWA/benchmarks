@@ -22,7 +22,6 @@ dev = [
     "benchmarks[sty]",
     "benchmarks[test]",
     "sphinx-autobuild",
-    "tox",
 ]
 doc = [
     "benchmarks[notebooks]",
@@ -56,7 +55,6 @@ sty = [
     "benchmarks[format]",
     "benchmarks[lint]",
     "benchmarks[types]",
-    "pre-commit-uv",
     "ruff",
 ]
 test = [
