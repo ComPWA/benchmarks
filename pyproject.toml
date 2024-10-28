@@ -15,16 +15,20 @@ license = {text = "GPLv3 or later"}
 name = "benchmarks"
 requires-python = ">=3.12"
 
-[project.optional-dependencies]
+[project.readme]
+content-type = "text/markdown"
+file = "README.md"
+
+[dependency-groups]
 dev = [
-    "benchmarks[doc]",
-    "benchmarks[jupyter]",
-    "benchmarks[sty]",
-    "benchmarks[test]",
+    "ruff",
     "sphinx-autobuild",
+    {include-group = "doc"},
+    {include-group = "jupyter"},
+    {include-group = "style"},
+    {include-group = "test"},
 ]
 doc = [
-    "benchmarks[notebooks]",
     "myst-nb",
     "myst-parser[linkify]",
     "sphinx",
@@ -33,11 +37,13 @@ doc = [
     "sphinx-codeautolink[ipython]",
     "sphinx-copybutton",
     "sphinx-togglebutton",
+    {include-group = "notebooks"},
 ]
 jupyter = [
     "jupyterlab",
     "jupyterlab",
     "jupyterlab-code-formatter >=3.0.0",
+    "jupyterlab-code-formatter",
     "jupyterlab-git",
     "jupyterlab-lsp",
     "jupyterlab-myst",
@@ -45,28 +51,12 @@ jupyter = [
     "python-lsp-ruff",
     "python-lsp-server[rope]",
 ]
-lint = [
-    "ruff",
+notebooks = ["pandas"]
+style = [
+    {include-group = "types"},
 ]
-notebooks = [
-    "pandas",
-]
-sty = [
-    "benchmarks[format]",
-    "benchmarks[lint]",
-    "benchmarks[types]",
-    "ruff",
-]
-test = [
-    "nbmake",
-]
-types = [
-    "sphinx-api-relink",
-]
-
-[project.readme]
-content-type = "text/markdown"
-file = "README.md"
+test = ["nbmake"]
+types = ["sphinx-api-relink"]
 
 [tool.setuptools]
 include-package-data = false

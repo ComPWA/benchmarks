@@ -169,7 +169,7 @@ dependencies = [
     { name = "tensorwaves", extra = ["jax"] },
 ]
 
-[package.optional-dependencies]
+[package.dependency-groups]
 dev = [
     { name = "jupyterlab" },
     { name = "jupyterlab-code-formatter" },
@@ -211,14 +211,10 @@ jupyter = [
     { name = "python-lsp-ruff" },
     { name = "python-lsp-server", extra = ["rope"] },
 ]
-lint = [
-    { name = "ruff" },
-]
 notebooks = [
     { name = "pandas" },
 ]
-sty = [
-    { name = "ruff" },
+style = [
     { name = "sphinx-api-relink" },
 ]
 test = [
@@ -230,39 +226,59 @@ types = [
 
 [package.metadata]
 requires-dist = [
-    { name = "benchmarks", extras = ["doc"], marker = "extra == 'dev'" },
-    { name = "benchmarks", extras = ["format"], marker = "extra == 'sty'" },
-    { name = "benchmarks", extras = ["jupyter"], marker = "extra == 'dev'" },
-    { name = "benchmarks", extras = ["lint"], marker = "extra == 'sty'" },
-    { name = "benchmarks", extras = ["notebooks"], marker = "extra == 'doc'" },
-    { name = "benchmarks", extras = ["sty"], marker = "extra == 'dev'" },
-    { name = "benchmarks", extras = ["test"], marker = "extra == 'dev'" },
-    { name = "benchmarks", extras = ["types"], marker = "extra == 'sty'" },
-    { name = "jupyterlab", marker = "extra == 'jupyter'" },
-    { name = "jupyterlab-code-formatter", marker = "extra == 'jupyter'", specifier = ">=3.0.0" },
-    { name = "jupyterlab-git", marker = "extra == 'jupyter'" },
-    { name = "jupyterlab-lsp", marker = "extra == 'jupyter'" },
-    { name = "jupyterlab-myst", marker = "extra == 'jupyter'" },
     { name = "matplotlib" },
-    { name = "myst-nb", marker = "extra == 'doc'" },
-    { name = "myst-parser", extras = ["linkify"], marker = "extra == 'doc'" },
-    { name = "nbmake", marker = "extra == 'test'" },
-    { name = "pandas", marker = "extra == 'notebooks'" },
     { name = "polarization-sensitivity", git = "https://github.com/redeboer/polarization-sensitivity?rev=15f5ce0" },
-    { name = "python-lsp-ruff", marker = "extra == 'jupyter'" },
-    { name = "python-lsp-server", extras = ["rope"], marker = "extra == 'jupyter'" },
-    { name = "ruff", marker = "extra == 'lint'" },
-    { name = "ruff", marker = "extra == 'sty'" },
-    { name = "sphinx", marker = "extra == 'doc'" },
-    { name = "sphinx-api-relink", marker = "extra == 'doc'" },
-    { name = "sphinx-api-relink", marker = "extra == 'types'" },
-    { name = "sphinx-autobuild", marker = "extra == 'dev'" },
-    { name = "sphinx-book-theme", marker = "extra == 'doc'" },
-    { name = "sphinx-codeautolink", extras = ["ipython"], marker = "extra == 'doc'" },
-    { name = "sphinx-copybutton", marker = "extra == 'doc'" },
-    { name = "sphinx-togglebutton", marker = "extra == 'doc'" },
     { name = "tensorwaves", extras = ["jax"], specifier = ">=0.4.5" },
 ]
+
+[package.metadata.dependency-groups]
+dev = [
+    { name = "jupyterlab" },
+    { name = "jupyterlab-code-formatter" },
+    { name = "jupyterlab-code-formatter", specifier = ">=3.0.0" },
+    { name = "jupyterlab-git" },
+    { name = "jupyterlab-lsp" },
+    { name = "jupyterlab-myst" },
+    { name = "myst-nb" },
+    { name = "myst-parser", extras = ["linkify"] },
+    { name = "nbmake" },
+    { name = "pandas" },
+    { name = "python-lsp-ruff" },
+    { name = "python-lsp-server", extras = ["rope"] },
+    { name = "ruff" },
+    { name = "sphinx" },
+    { name = "sphinx-api-relink" },
+    { name = "sphinx-autobuild" },
+    { name = "sphinx-book-theme" },
+    { name = "sphinx-codeautolink", extras = ["ipython"] },
+    { name = "sphinx-copybutton" },
+    { name = "sphinx-togglebutton" },
+]
+doc = [
+    { name = "myst-nb" },
+    { name = "myst-parser", extras = ["linkify"] },
+    { name = "pandas" },
+    { name = "sphinx" },
+    { name = "sphinx-api-relink" },
+    { name = "sphinx-book-theme" },
+    { name = "sphinx-codeautolink", extras = ["ipython"] },
+    { name = "sphinx-copybutton" },
+    { name = "sphinx-togglebutton" },
+]
+jupyter = [
+    { name = "jupyterlab" },
+    { name = "jupyterlab-code-formatter" },
+    { name = "jupyterlab-code-formatter", specifier = ">=3.0.0" },
+    { name = "jupyterlab-git" },
+    { name = "jupyterlab-lsp" },
+    { name = "jupyterlab-myst" },
+    { name = "python-lsp-ruff" },
+    { name = "python-lsp-server", extras = ["rope"] },
+]
+notebooks = [{ name = "pandas" }]
+style = [{ name = "sphinx-api-relink" }]
+test = [{ name = "nbmake" }]
+types = [{ name = "sphinx-api-relink" }]
 
 [[package]]
 name = "bleach"
