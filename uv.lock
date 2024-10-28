@@ -219,6 +219,7 @@ style = [
 ]
 test = [
     { name = "nbmake" },
+    { name = "pandas" },
 ]
 
 [package.metadata]
@@ -274,7 +275,10 @@ jupyter = [
 ]
 notebooks = [{ name = "pandas" }]
 style = [{ name = "sphinx-api-relink" }]
-test = [{ name = "nbmake" }]
+test = [
+    { name = "nbmake" },
+    { name = "pandas" },
+]
 
 [[package]]
 name = "bleach"

@@ -53,7 +53,10 @@ jupyter = [
 ]
 notebooks = ["pandas"]
 style = ["sphinx-api-relink"]
-test = ["nbmake"]
+test = [
+    "nbmake",
+    {include-group = "notebooks"},
+]
 
 [tool.setuptools]
 include-package-data = false
