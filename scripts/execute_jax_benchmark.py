@@ -33,9 +33,8 @@ logging.basicConfig(
     format="%(asctime)s.%(msecs)03d %(levelname)-8s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
-LOGGER = logging.getLogger()
+_LOGGER = logging.getLogger()
 mute_jax_warnings()
-
 yaml.add_representer(defaultdict, Representer.represent_dict)
 
 BENCHMARK_CASES = [
@@ -78,7 +77,7 @@ def main() -> int:
         existing_benchmark = t.get(n)
         if existing_benchmark is not None:
             if all(len(v) == NUMBER_OF_RUNS for v in existing_benchmark.values()):
-                logging.warning(f"Benchmark for {n:,} events already exists")
+                _LOGGER.warning(f"Benchmark for {n:,} events already exists")
                 progress_bar.update(NUMBER_OF_RUNS)
                 continue
             t[n] = defaultdict(list)
@@ -118,22 +117,19 @@ def create_amplitude_model() -> AmplitudeModel:
 def prepare_functions(
     model: AmplitudeModel,
 ) -> tuple[ParametrizedBackendFunction, PositionalArgumentFunction]:
-    original_log_level = LOGGER.getEffectiveLevel()
-    LOGGER.setLevel(logging.INFO)
-    logging.info("Unfolding intensity expression")
+    _LOGGER.info("Unfolding intensity expression")
     unfolded_intensity_expr = perform_cached_doit(model.full_expression)
-    logging.info("Substituting parameters")
+    _LOGGER.info("Substituting parameters")
     substituted_expr = unfolded_intensity_expr.xreplace(model.parameter_defaults)
-    logging.info("Lambdifying full intensity expression")
+    _LOGGER.info("Lambdifying full intensity expression")
     parametrized_func = create_parametrized_function(
         unfolded_intensity_expr,
         parameters=model.parameter_defaults,
         backend="jax",
     )
-    logging.info("Lambdifying substituted intensity expression")
+    _LOGGER.info("Lambdifying substituted intensity expression")
     substituted_func = create_function(substituted_expr, backend="jax")
-    logging.info("Finished function lambdification")
-    LOGGER.setLevel(original_log_level)
+    _LOGGER.info("Finished function lambdification")
     return parametrized_func, substituted_func
 
 
@@ -141,10 +137,10 @@ def generate_sample(
     model: AmplitudeModel, n_events: int, seed: int | None = None
 ) -> DataSample:
     transformer = create_data_transformer(model)
-    original_log_level = LOGGER.getEffectiveLevel()
-    LOGGER.setLevel(logging.ERROR)
+    original_log_level = _LOGGER.getEffectiveLevel()
+    _LOGGER.setLevel(logging.ERROR)
     phsp_sample = generate_phasespace_sample(model.decay, n_events, seed)
-    LOGGER.setLevel(original_log_level)
+    _LOGGER.setLevel(original_log_level)
     return transformer(phsp_sample)
 
 
