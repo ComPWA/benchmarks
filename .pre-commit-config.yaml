@@ -22,8 +22,8 @@ repos:
           - --repo-title=benchmarks
       - id: colab-toc-visible
       - id: remove-empty-tags
-
       - id: set-nb-display-name
+
   - repo: https://github.com/kynan/nbstripout
     rev: 0.8.1
     hooks:
