@@ -147,7 +147,9 @@ def generate_sample(
 T = TypeVar("T", ParametrizedBackendFunction, PositionalArgumentFunction)
 
 
-def recompile_jax_function(func: T) -> T:
+def recompile_jax_function[
+    T: (ParametrizedBackendFunction, PositionalArgumentFunction)
+](func: T) -> T:
     def recompile(f):
         # https://jax.readthedocs.io/en/latest/jax-101/02-jitting.html#caching
         return jax.jit(partial(f))
