@@ -61,9 +61,6 @@ test = [
 include-package-data = false
 
 [tool.pyright]
-exclude = [
-    "**/.venv/",
-]
 reportAttributeAccessIssue = false
 reportGeneralTypeIssues = false
 reportImportCycles = false
@@ -96,7 +93,6 @@ addopts = [
 ]
 filterwarnings = [
     "error",
-    "ignore:.*argument to NotebookFile is deprecated.*:pytest.PytestRemovedIn8Warning",
     "ignore:the imp module is deprecated in favour of importlib.*:DeprecationWarning",
 ]
 markers = [
@@ -230,7 +226,7 @@ commands = [
         "--keep-going",
         "--show-traceback",
         "docs/",
-        "docs/_build/html",
+        "docs/_build/html/",
     ],
 ]
 description = "Build documentation and API through Sphinx"
@@ -241,16 +237,21 @@ allowlist_externals = ["sphinx-autobuild"]
 commands = [
     [
         "sphinx-autobuild",
-        "--open-browser",
         "--port=0",
-        "--re-ignore='.*/__pycache__/.*'",
-        "--re-ignore='.*/.ipynb_checkpoints/.*'",
-        "--re-ignore='.*/.virtual_documents/.*'",
-        "--re-ignore='.*\\.tmp'",
-        "--watch",
-        "docs",
+        "--re-ignore=/__pycache__(/.*)?$",
+        "--re-ignore=/_build(/.*)?$",
+        "--re-ignore=/\\.cache(/.*)?$",
+        "--re-ignore=/\\.egg-info(/.*)?$",
+        "--re-ignore=/\\.ipynb_checkpoints(/.*)?$",
+        "--re-ignore=/\\.virtual_documents(/.*)?$",
+        "--re-ignore=/api(/.*)?$",
+        "--re-ignore=/docs$",
+        "--re-ignore=/version\\.py$",
+        "--re-ignore=\\.egg-info(/.*)?$",
+        "--re-ignore=\\.png$",
+        "--re-ignore=\\.svg$",
         "docs/",
-        "docs/_build/html",
+        "docs/_build/html/",
     ],
 ]
 description = "Set up a server to directly preview changes to the HTML pages"
@@ -287,7 +288,7 @@ commands = [
         "--builder=linkcheck",
         "--show-traceback",
         "docs/",
-        "docs/_build/linkcheck",
+        "docs/_build/linkcheck/",
     ],
 ]
 description = "Check external links in the documentation (requires internet connection)"
