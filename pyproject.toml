@@ -61,9 +61,6 @@ test = [
 include-package-data = false
 
 [tool.pyright]
-exclude = [
-    "**/.venv/",
-]
 reportAttributeAccessIssue = false
 reportGeneralTypeIssues = false
 reportImportCycles = false
